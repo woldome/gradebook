@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 namespace GradeBook
 {
-    class GradeBook
+    public class GradeBook
     {
         private readonly List<Double> _gradeList;
         public GradeBook(List<Double> gradeList)
@@ -10,6 +10,14 @@ namespace GradeBook
             _gradeList=gradeList;
         }
        
+       public GradeBook()
+       {
+           _gradeList = new List<double>();
+       }
+       public void addGrade(double grade)
+       {
+           _gradeList.Add(grade);
+       }
         public List<double> getGradeList()
         {
             return _gradeList;
@@ -26,6 +34,16 @@ namespace GradeBook
             double tmp = double.MinValue;
             foreach(var item in _gradeList) {if(item >tmp) tmp=item;}
             return tmp;
+        }
+        public Stat getStat()
+        {
+            var stat = new Stat
+            {
+                avg = getAverage(),
+                min = getMin(),
+                max = getMax()
+            };
+            return stat;
         }
         public double getMin()
         {
